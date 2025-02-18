@@ -27,7 +27,7 @@ public class DangNhap_or_BatDau : MonoBehaviour
 
     void Start()
     {
-          firebaseAuth = FirebaseAuth.DefaultInstance; 
+        firebaseAuth = FirebaseAuth.DefaultInstance; 
         firebaseAuth.StateChanged += OnAuthStateChanged;
         Log_out.onClick.AddListener(DangXuat);
     }
@@ -44,7 +44,7 @@ public class DangNhap_or_BatDau : MonoBehaviour
         else
         {
             Debug.Log("Chưa có ai đăng nhập.");
-               NutStart.SetActive(false); // Hiện nút vào game
+            NutStart.SetActive(false); // Hiện nút vào game
             NutDangNhapDangKi.SetActive(true);
         }
     }

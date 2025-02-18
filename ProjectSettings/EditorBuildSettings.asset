@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Login_Sence.unity
     guid: 265bea7d0f02b6b4699e24af3d60223b
+  - enabled: 1
+    path: Assets/Scenes/Loopy_Sence.unity
+    guid: c8be196bac0e3434ab345c59fe69ec1a
   m_configObjects: {}

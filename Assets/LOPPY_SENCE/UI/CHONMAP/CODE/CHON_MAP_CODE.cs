@@ -11,7 +11,6 @@ public class CHON_MAP_CODE : MonoBehaviour
  
 
     public int ThuTuMap = 0;
-    
     public GameObject ThanhTruot;
     public float ScollPos =0;
     float []pos;
