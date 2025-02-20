@@ -13,7 +13,12 @@
           "package_name": "com.ktstudio.platformer"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "415184194981-n1skn6abjkru7gni6uje75gkvhirbl9g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyA17LNdQlhl_OHTvzcSJWOiNlHmt5n5F3Q"
@@ -21,7 +26,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "415184194981-n1skn6abjkru7gni6uje75gkvhirbl9g.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "415184194981-ot388f7rr4urg9rabgsdliidf8c7bb33.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ktstudio.platformer"
+              }
+            }
+          ]
         }
       }
     }

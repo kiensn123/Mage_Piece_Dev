@@ -7,8 +7,10 @@ public class Move_Manager : MonoBehaviour
     
     public ThongTinCoBan ThongTinCoBan1;
     public DiChuyenCoBan diChuyenCoBan ;
-    public Luot luot;
+ 
     public Nhay nhay;
+
+    public Luot luot ;
     public float input ;
 
     public Button_Mobi_Joy button_Mobi_Joy;
@@ -18,7 +20,8 @@ public class Move_Manager : MonoBehaviour
     {
         diChuyenCoBan = new DiChuyenCoBan(gameObject);
         nhay = new Nhay(gameObject);
-        luot = new Luot(gameObject);
+        // luot = new Luot(gameObject);
+        luot = gameObject.AddComponent<Luot>();
 
         May_Tinh = false;
         if ( Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)

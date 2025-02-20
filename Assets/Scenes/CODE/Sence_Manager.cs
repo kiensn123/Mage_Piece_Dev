@@ -44,6 +44,6 @@ public abstract class Sence_Manager : MonoBehaviour
     }
 
     public void Load_Sence_BinhThuong(string Sence_Name_1){
-
+        SceneManager.LoadScene(Sence_Name_1);
     }
 }

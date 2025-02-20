@@ -59,9 +59,8 @@ public class Dang_Ki : MonoBehaviour, Form_InterFace
                 {
                     Debug.Log("Cập nhật tên người chơi thành công: " + user.DisplayName);
 
-                    Reset_Plahor();
-                    gameObject.SetActive(false);
-                    DangNhap_OBJ.SetActive(true);
+              
+                    DangNhap_OBJ.SetActive(false);
 
                 }
                 else

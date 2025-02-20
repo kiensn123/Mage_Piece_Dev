@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Mage_Piece_Dev.sln"
+    "dotnet.defaultSolution": "Mage_Piece_(vesion 0.0.1).sln"
 }
