@@ -50,7 +50,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: DoRoi
-    m_EventTreshold: 0
+    m_EventTreshold: -2
   - m_ConditionMode: 3
     m_ConditionEvent: Health
     m_EventTreshold: 0.1
@@ -152,7 +152,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: DoRoi
-    m_EventTreshold: 0
+    m_EventTreshold: -0.5
   - m_ConditionMode: 3
     m_ConditionEvent: Health
     m_EventTreshold: 0.1
@@ -575,7 +575,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 3
     m_ConditionEvent: DoRoi
-    m_EventTreshold: -0.1
+    m_EventTreshold: -0.3
   - m_ConditionMode: 3
     m_ConditionEvent: Health
     m_EventTreshold: 0.1
@@ -880,7 +880,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 4
     m_ConditionEvent: DoRoi
-    m_EventTreshold: 0
+    m_EventTreshold: -2
   - m_ConditionMode: 3
     m_ConditionEvent: Health
     m_EventTreshold: 0.1
@@ -1125,10 +1125,10 @@ AnimatorStateMachine:
     m_Position: {x: 370, y: 870, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1886017416465704865}
-    m_Position: {x: 0, y: 610, z: 0}
+    m_Position: {x: 320, y: 550, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7907633746901176867}
-    m_Position: {x: 470, y: 280, z: 0}
+    m_Position: {x: 790, y: 190, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -1176,12 +1176,12 @@ AnimatorStateMachine:
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: 8288034564270276379}
-    second:
-    - {fileID: -5090855087572072804}
   - first: {fileID: -3133012506303085249}
     second:
     - {fileID: -6710606892166408935}
+  - first: {fileID: 8288034564270276379}
+    second:
+    - {fileID: -5090855087572072804}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 430, y: 150, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}

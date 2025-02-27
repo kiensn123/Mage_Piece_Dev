@@ -9,7 +9,6 @@ public class TT_BinhThuong : A_TrangThai
     {
         trangThai_Manager.HienThi_TrangThai = "BinhThuong";
         mau = trangThai_Manager.gameObject.GetComponent<Mau>();
-
         trangThai_Manager.gameObject.GetComponent<Move_Manager>().diChuyenCoBan.DuocDiChuyen = true;
         trangThai_Manager.gameObject.GetComponent<Move_Manager>().luot.DuocLuot = true;
         trangThai_Manager.gameObject.GetComponent<Move_Manager>().nhay.DuocNhay = true;

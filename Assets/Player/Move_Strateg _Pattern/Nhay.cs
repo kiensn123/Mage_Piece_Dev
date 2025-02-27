@@ -31,6 +31,8 @@ public class Nhay : I_DI_Chuyen
         animator = gameObject.GetComponentInChildren<Animator>();
         DuocNhay = true;
         
+        PLayer_GUI.Instance.Nhay.onClick.AddListener(HD_Nhay);
+      
     }
     private bool Kiem_tra_TrenMatDat(){
 
@@ -61,14 +63,8 @@ public class Nhay : I_DI_Chuyen
     public void HanhDong_DiChuyen()
     {
         animator.SetFloat("DoRoi",rigidbody2D.velocity.y);
-        if (!DuocNhay){
-            return;
-        }
-     
-        
-        if (Input.GetKeyDown(KeyCode.Space) &&  Kiem_tra_TrenMatDat() ){
-            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x,thongTinCoBan.Nhay_Cao);
-            animator.SetBool("Nhay",true);
+        if (Input.GetKeyDown(KeyCode.Space)){
+            HD_Nhay();
         }
         if (rigidbody2D.velocity.y<0){
         
@@ -80,10 +76,26 @@ public class Nhay : I_DI_Chuyen
 
     }
 
+
+
+    public void HD_Nhay(){
+        if (!DuocNhay){
+            return;
+        }
+     
+        if ( DieuKien() ){
+            rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x,thongTinCoBan.Nhay_Cao);
+            animator.SetBool("Nhay",true);
+        }
+    }
+
     public void KetThuc_HanhDong()
     {
         throw new System.NotImplementedException();
     }
 
-   
+    public bool DieuKien()
+    {
+        return Kiem_tra_TrenMatDat();
+    }
 }

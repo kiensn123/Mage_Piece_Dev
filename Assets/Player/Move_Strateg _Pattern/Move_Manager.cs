@@ -22,6 +22,7 @@ public class Move_Manager : MonoBehaviour
         nhay = new Nhay(gameObject);
         // luot = new Luot(gameObject);
         luot = gameObject.AddComponent<Luot>();
+        
 
         May_Tinh = false;
         if ( Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.OSXPlayer)
@@ -36,12 +37,27 @@ public class Move_Manager : MonoBehaviour
     void Update()
     {
         if (May_Tinh){
-            input = Input.GetAxis("Horizontal");
+
+            input =0;
+            if (Input.GetKey(KeyCode.A)){
+                input = -1;
+            }
+            if (Input.GetKey(KeyCode.D)){
+                input = 1;
+            }
+            // input = Input.GetAxis("Horizontal");
         }else{
             input = button_Mobi_Joy.joystick.Horizontal;
         }
+
+        input = (input != 0) ? (input > 0 ? 1 : -1) : input;
+
+
+
+
         diChuyenCoBan.HanhDong_DiChuyen();
         nhay.HanhDong_DiChuyen();
         luot.HanhDong_DiChuyen();
     }
+    
 }

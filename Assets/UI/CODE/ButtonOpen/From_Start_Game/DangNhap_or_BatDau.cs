@@ -14,10 +14,10 @@ public class DangNhap_or_BatDau : MonoBehaviour
     public Button Log_out;
 
 
-   [Header("Obj")]
-   public GameObject NutStart;
+    [Header("Obj")]
+    public GameObject NutStart;
 
-   public GameObject NutDangNhapDangKi;
+    public GameObject NutDangNhapDangKi;
 
     [Header("FireBase")]
     private FirebaseAuth firebaseAuth;
@@ -38,6 +38,7 @@ public class DangNhap_or_BatDau : MonoBehaviour
         if (currentUser != null)
         {
             Debug.Log("Người dùng đã đăng nhập: " + currentUser.Email);
+ 
             NutStart.SetActive(true); // Hiện nút vào game
             NutDangNhapDangKi.SetActive(false);
         }

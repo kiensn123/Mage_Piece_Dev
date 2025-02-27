@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Firebase;
 using Firebase.Auth;
 using Firebase.Extensions;
 using UnityEngine;
@@ -57,15 +58,42 @@ public class Dang_Nhap : MonoBehaviour, Form_InterFace
         firebaseAuth.SignInWithEmailAndPasswordAsync(Gamil_, Mk).ContinueWithOnMainThread(task => {
             if (task.IsCanceled) { // Kiểm tra nếu task bị hủy
                 Debug.LogError("Đăng nhập bị hủy"); // In ra lỗi nếu đăng nhập bị hủy
+                ThongBao_Sever.Instance.ThongBaoCoBan("Đăng nhập bị hủy");
                 return;
             }
             if (task.IsFaulted) { // Kiểm tra nếu có lỗi xảy ra trong quá trình đăng nhập
-                Debug.LogError("Đăng nhập thất bại"); // In ra lỗi nếu đăng nhập thất bại
+                foreach (var error in task.Exception.Flatten().InnerExceptions) {
+                    FirebaseException firebaseEx = error as FirebaseException;
+                    if (firebaseEx != null) {
+                        AuthError errorCode = (AuthError)firebaseEx.ErrorCode;
+                        switch (errorCode) {
+                            case AuthError.MissingEmail:
+                                ThongBao_Sever.Instance.ThongBaoCoBan("Vui lòng nhập email.");
+                                break;
+                            case AuthError.MissingPassword:
+                                ThongBao_Sever.Instance.ThongBaoCoBan("Vui lòng nhập mật khẩu.");
+                                break;
+                            case AuthError.InvalidEmail:
+                                ThongBao_Sever.Instance.ThongBaoCoBan("Email không hợp lệ.");
+                                break;
+                            case AuthError.WrongPassword:
+                                ThongBao_Sever.Instance.ThongBaoCoBan("Sai mật khẩu.");
+                                break;
+                            case AuthError.UserNotFound:
+                                ThongBao_Sever.Instance.ThongBaoCoBan("Tài khoản không tồn tại.");
+                                break;
+                            default:
+                                ThongBao_Sever.Instance.ThongBaoCoBan("Đăng nhập thất bại: " + error.Message);
+                                break;
+                        }
+                    }
+                }
                 return;
             }
             if (task.IsCompleted) { // Kiểm tra nếu task hoàn thành
+                FirebaseUser user = task.Result.User;   
                 Debug.Log("Đăng nhập thành công"); // In thông báo nếu đăng nhập thành công
-                FirebaseUser user = task.Result.User; // Lấy thông tin của user đã đăng nhập thành công
+                // Lấy thông tin của user đã đăng nhập thành công
                 OutNhom.SetActive(false);
             }
         });

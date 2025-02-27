@@ -9,4 +9,6 @@ public interface I_DI_Chuyen
     void HanhDong_DiChuyen();
 
     void KetThuc_HanhDong();
+
+    bool DieuKien();
 }

@@ -12,8 +12,6 @@ using UnityEngine;
 
 public class Call_DuLieu_Player : MonoBehaviour
 {
-    
-
     private static Call_DuLieu_Player instance;
     public static Call_DuLieu_Player Instance
         {
@@ -69,8 +67,9 @@ public class Call_DuLieu_Player : MonoBehaviour
       
         
     }
-
+    
     public async Task CallDuLieu(){
+        user = FirebaseAuth.DefaultInstance.CurrentUser;
         Call_ThonTing_NguoiChoi();
         await KiemTra(user.UserId);
     }
@@ -78,7 +77,7 @@ public class Call_DuLieu_Player : MonoBehaviour
 
     public void Call_ThonTing_NguoiChoi(){
         //  FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
-
+    
         Thong_Tin_CoBan thong_Tin_CoBan = new Thong_Tin_CoBan(user.DisplayName,user.Email);
         player_Mage.Thong_Tin_Co_Ban = thong_Tin_CoBan;
   
@@ -90,11 +89,11 @@ public class Call_DuLieu_Player : MonoBehaviour
     public async Task KiemTra(string User_id){
         ///
         bool userTonTai = await Ktra_UserId_(User_id);
-        if (userTonTai){ Lay_Toan_BoDu_Lieu_Nguoi_Choi(User_id); return;}
+        if (userTonTai){ await Lay_Toan_BoDu_Lieu_Nguoi_Choi(User_id); return;}
         ///
         wite_DataBase_UserId_New(User_id);
 
-        Lay_Toan_BoDu_Lieu_Nguoi_Choi(User_id);
+        await Lay_Toan_BoDu_Lieu_Nguoi_Choi(User_id);
 
 
     }
@@ -169,44 +168,45 @@ public class Call_DuLieu_Player : MonoBehaviour
 
 
 
-    public void Lay_Toan_BoDu_Lieu_Nguoi_Choi(string User_id){
-      
+    public Task Lay_Toan_BoDu_Lieu_Nguoi_Choi(string User_id) {
+        TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
+
         dbReference.Child("Users").Child(User_id).GetValueAsync().ContinueWithOnMainThread(task => {
-        if (task.IsCompleted){
-            DataSnapshot snapshot = task.Result;
+            if (task.IsCompleted) {
+                DataSnapshot snapshot = task.Result;
+                if (snapshot.Exists) {
+                    if (snapshot.Child("ThongSo").Exists) {
+                        Thongso thongso = JsonUtility.FromJson<Thongso>(snapshot.Child("ThongSo").GetRawJsonValue());
+                        player_Mage.Thong_So = thongso;
+                        Debug.Log($"📌 Tien: {thongso.Tien}, Ruby: {thongso.Ruby}, Capdo: {thongso.Capdo}");
+                    } else {
+                        Debug.LogWarning("Không tìm thấy dữ liệu ThongSo!");
+                    }
 
-            if (snapshot.Exists) {
-                // 🔥 Lấy dữ liệu của ThongSo
-                if (snapshot.Child("ThongSo").Exists) {
-                    Thongso thongso = JsonUtility.FromJson<Thongso>(snapshot.Child("ThongSo").GetRawJsonValue());
+                    if (snapshot.Child("TienTrinh").Exists) {
+                        TienTrinh tienTrinh = JsonUtility.FromJson<TienTrinh>(snapshot.Child("TienTrinh").GetRawJsonValue());
+                        player_Mage.Tien_Trinh = tienTrinh;
+                        Debug.Log($"📌 Skill_Id: {tienTrinh.Skill_Id}, Map_Win: {string.Join(", ", tienTrinh.Map_Win)}");
+                    } else {
+                        Debug.LogWarning("Không tìm thấy dữ liệu TienTrinh!");
+                    }
 
-                    Debug.Log(snapshot.Child("ThongSo").GetRawJsonValue());
-                    player_Mage.Thong_So = thongso;
-
-                    Debug.Log($"📌 Tien: {thongso.Tien}, Ruby: {thongso.Ruby}, Capdo: {thongso.Capdo}");
+                    Debug.Log("Da Call Xong");
+                    tcs.SetResult(true); // Báo hiệu hoàn thành
                 } else {
-                    Debug.LogWarning("Không tìm thấy dữ liệu ThongSo!");
-                }
-
-                // 🔥 Lấy dữ liệu của TienTrinh
-                if (snapshot.Child("TienTrinh").Exists) {
-                    TienTrinh tienTrinh = JsonUtility.FromJson<TienTrinh>(snapshot.Child("TienTrinh").GetRawJsonValue());
-
-                    player_Mage.Tien_Trinh = tienTrinh;
-
-                    Debug.Log($"📌 Skill_Id: {tienTrinh.Skill_Id}, Map_Win: {string.Join(", ", tienTrinh.Map_Win)}");
-                } else {
-                    Debug.LogWarning("Không tìm thấy dữ liệu TienTrinh!");
+                    Debug.LogError("❌ Không tìm thấy dữ liệu người dùng!");
+                    tcs.SetResult(false);
                 }
             } else {
-                Debug.LogError("❌ Không tìm thấy dữ liệu người dùng!");
+                Debug.LogError("❌ Lỗi khi đọc dữ liệu từ Firebase!");
+                tcs.SetException(task.Exception);
             }
+        });
 
-        } else {
-            Debug.LogError("❌ Lỗi khi đọc dữ liệu từ Firebase!");
-        }
-    });
+        return tcs.Task;
     }
 
-  
+    
+
+    
 }

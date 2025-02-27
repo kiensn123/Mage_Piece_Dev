@@ -139,17 +139,17 @@ public class HieuUng : MonoBehaviour
 
         CinemachineBasicMultiChannelPerlin perlin = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();    
         perlin.m_AmplitudeGain = lucSkake;
-        DOTween.To(() => cinemachineVirtualCamera.m_Lens.OrthographicSize,
-        x => cinemachineVirtualCamera.m_Lens.OrthographicSize = x,
-        10,
-        0.2f);
+        // DOTween.To(() => cinemachineVirtualCamera.m_Lens.OrthographicSize,
+        // x => cinemachineVirtualCamera.m_Lens.OrthographicSize = x,
+        // 10,
+        // 0.2f);
         yield return new WaitForSeconds(time);
 
         perlin.m_AmplitudeGain = 0;
-        DOTween.To(() => cinemachineVirtualCamera.m_Lens.OrthographicSize,
-        x => cinemachineVirtualCamera.m_Lens.OrthographicSize = x,
-        7,
-        0.2f);
+        // DOTween.To(() => cinemachineVirtualCamera.m_Lens.OrthographicSize,
+        // x => cinemachineVirtualCamera.m_Lens.OrthographicSize = x,
+        // 7,
+        // 0.2f);
 
 
     }

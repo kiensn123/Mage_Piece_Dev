@@ -40,7 +40,7 @@ public abstract class A_Resources :MonoBehaviour
             Het();
         }else{
             Hien_Tai -= SoLuong;
-            
+     
         }
         DangTru();
     }

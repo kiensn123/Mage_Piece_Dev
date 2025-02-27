@@ -45,6 +45,7 @@ public class Dang_Ki : MonoBehaviour, Form_InterFace
         firebaseAuth.CreateUserWithEmailAndPasswordAsync(email,password).ContinueWithOnMainThread(task=>{
             if (task.IsCanceled || task.IsFaulted){
                 Debug.LogError("Đang Kí Bị Lỗi");
+                ThongBao_Sever.Instance.ThongBaoCoBan("Đăng kí bị lỗi");
                 return;
             }
             FirebaseUser user = task.Result.User;
@@ -58,8 +59,6 @@ public class Dang_Ki : MonoBehaviour, Form_InterFace
                 if (updateTask.IsCompleted)
                 {
                     Debug.Log("Cập nhật tên người chơi thành công: " + user.DisplayName);
-
-              
                     DangNhap_OBJ.SetActive(false);
 
                 }
@@ -119,24 +118,28 @@ public class Dang_Ki : MonoBehaviour, Form_InterFace
         if (string.IsNullOrWhiteSpace(Ten_Nguoi_Choi.text))
         {
             Debug.Log( "Tên người chơi không được để trống!");
+            ThongBao_Sever.Instance.ThongBaoCoBan("Tên người chơi không được để trống!");
             return false;
         }
 
         if (string.IsNullOrWhiteSpace(Gmail.text))
         {
             Debug.Log("Gmail không được trống");
+            ThongBao_Sever.Instance.ThongBaoCoBan("Gmail không được trống");
             return false;
         }
 
         if (Mat_Khau.text.Length < 6)
         {
-            Debug.Log("Mật khẩu phải có ít nhất 6 ký tự!");
+           
+            ThongBao_Sever.Instance.ThongBaoCoBan("Mật khẩu phải có ít nhất 6 ký tự!");
             return false;
         }
 
         if (Mat_Khau.text != Nhap_Lai_Mat_Khau.text)
         {
             Debug.Log("Mật khẩu nhập lại không khớp!");
+            ThongBao_Sever.Instance.ThongBaoCoBan("Mật khẩu nhập lại không khớp!");
             return false;
         }
 
