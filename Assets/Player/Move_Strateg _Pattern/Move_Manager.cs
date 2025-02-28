@@ -48,9 +48,10 @@ public class Move_Manager : MonoBehaviour
             // input = Input.GetAxis("Horizontal");
         }else{
             input = button_Mobi_Joy.joystick.Horizontal;
+            input = (input != 0) ? (input > 0 ? 1 : -1) : input;
         }
 
-        input = (input != 0) ? (input > 0 ? 1 : -1) : input;
+
 
 
 

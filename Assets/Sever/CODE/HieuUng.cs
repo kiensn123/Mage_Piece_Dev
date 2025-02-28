@@ -235,7 +235,7 @@ public class HieuUng : MonoBehaviour
 
         DOTween.To(() => _propertyBlock.GetFloat("_TanBien_Float"),
                 x => _propertyBlock.SetFloat("_TanBien_Float", x),
-                1f, 5f).OnUpdate(() => renderer.SetPropertyBlock(_propertyBlock));
+                1f, 2f).OnUpdate(() => renderer.SetPropertyBlock(_propertyBlock));
 
         
     }

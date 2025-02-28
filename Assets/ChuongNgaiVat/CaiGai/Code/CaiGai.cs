@@ -21,10 +21,14 @@ public class CaiGai : MonoBehaviour
             mau.Giam(Damage);
 
             ThayDoiTrangThai_Time thayDoiTrangThai_Time =   other.gameObject.GetComponent<ThayDoiTrangThai_Time>();
+            Rigidbody2D rb = other.gameObject.GetComponent<Rigidbody2D>();
+            rb.velocity = Vector2.zero;
+            rb.AddForce(Vector2.zero,ForceMode2D.Impulse);
             thayDoiTrangThai_Time.ThemThoiGianChoang(ThoiGianStunde);
 
-            Rigidbody2D rb = other.gameObject.GetComponent<Rigidbody2D>();
+   
             Vector2 knockbackDirection = (other.transform.position - transform.position).normalized;
+            Debug.Log($"Knockback Direction: {knockbackDirection}, Force: {knockbackDirection * LucBat}");
             rb.AddForce(knockbackDirection * LucBat, ForceMode2D.Impulse);
 
             

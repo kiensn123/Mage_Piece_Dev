@@ -90,7 +90,7 @@ public class DiChuyenCoBan : I_DI_Chuyen
 
         Vector2 origin = gameObject.transform.position; // Lấy vị trí nhân vật làm gốc
         Vector2 direction = Vector2.right * Mathf.Sign(move_Manager.input);; // Hướng di chuyển
-
+        
         RaycastHit2D hit = Physics2D.BoxCast(origin, new Vector2(boxWidth, boxHeight), 0, direction, rayLength, LayerMask.GetMask("MatDat"));
         return hit.collider != null;
     }
