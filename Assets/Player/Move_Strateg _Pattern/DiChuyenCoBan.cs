@@ -58,9 +58,13 @@ public class DiChuyenCoBan : I_DI_Chuyen
         if (move_Manager.input!= 0){
             
             animator.SetBool("DiChuyen",true);
-             Art.transform.rotation = move_Manager.input > 0 
-            ? Quaternion.Euler(0, 0, 0) 
-            : Quaternion.Euler(0, 180, 0);
+            //  Art.transform.rotation = move_Manager.input > 0 
+            // ? Quaternion.Euler(0, 0, 0) 
+            // : Quaternion.Euler(0, 180, 0);
+
+            Art.transform.localScale = move_Manager.input > 0 
+            ? new Vector3(1, 1, 1) 
+            : new Vector3(-1,1,1) ;
 
 
        }else{

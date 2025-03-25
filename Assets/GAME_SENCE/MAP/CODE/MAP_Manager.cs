@@ -10,8 +10,6 @@ public class MAP_Manager : Singleton<MAP_Manager>
     public MAP_Sezabile Map_Duoc_Chon;
 
 
-    
-
 
 
 }

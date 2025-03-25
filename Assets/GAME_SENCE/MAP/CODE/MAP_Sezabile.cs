@@ -9,7 +9,7 @@ public class MAP_Sezabile
 {
     public int  Map_ID;
     public string Map_name;
-    public int Map_Stage;
+    public int Map_Stage_ID;
     public Sprite Anh_Map;
 
     public bool Is_Win;
